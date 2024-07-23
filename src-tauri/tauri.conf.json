@@ -67,6 +67,8 @@
     },
     "windows": [
       {
+        "label": "main",
+        "url": "http://localhost:3000",
         "fullscreen": false,
         "height": 600,
         "resizable": true,

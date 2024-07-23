@@ -4,6 +4,7 @@ import { appWindow } from '@tauri-apps/api/window';
 
 const CustomTitleBar = () => {
   const [isMaximized, setIsMaximized] = useState(false);
+  
 
   useEffect(() => {
     const checkMaximized = async () => {
