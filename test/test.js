@@ -5,7 +5,8 @@ const { spawn, spawnSync } = require('child_process');
 const { Builder, By, Capabilities } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
-const application = '../src-tauri/target/release/menu-bar-app';
+const projectRoot = '/home/ubunmtu-24/Documents/tauri-menu-bar';
+const application = path.join(projectRoot, 'src-tauri', 'target', 'release', 'menu-bar-app');
 
 let driver;
 
@@ -16,7 +17,7 @@ before(async function () {
   this.timeout(120000);
   try {
     console.log('Building Tauri application...');
-    spawnSync('cargo', ['build', '--release'], { stdio: 'inherit' });
+    spawnSync('cargo', ['build', '--release'], { cwd: path.join(projectRoot, 'src-tauri'), stdio: 'inherit' });
 
     console.log('Starting Tauri driver...');
     tauriDriver = spawn(
@@ -26,9 +27,9 @@ before(async function () {
     );
 
     const chromeOptions = new chrome.Options();
-    chromeOptions.setChromeBinaryPath(application); 
+    chromeOptions.setChromeBinaryPath(application);
     chromeOptions.addArguments('--start-maximized');
-    chromeOptions.addArguments('--remote-debugging-port=9222'); 
+    chromeOptions.addArguments('--remote-debugging-port=9222');
     const capabilities = Capabilities.chrome();
     capabilities.set('goog:chromeOptions', {
       binary: application,
@@ -83,4 +84,3 @@ describe('Hello Tauri', function () {
     expect(luma).to.be.lessThan(100);
   });
 });
-
