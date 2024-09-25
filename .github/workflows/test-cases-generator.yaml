@@ -1,0 +1,46 @@
+name: AI Test Case Generator
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  generate-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js (adjust version if needed)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'  # Update to match your project requirements
+
+      # Step 3: Install Dependencies (use package manager based on your project)
+      - name: Install Dependencies
+        run: npm install  # Modify if using another package manager
+
+      # Step 4: Run AI Test Case Generator
+      - name: Run AI Test Case Generator
+        run: |
+          # Replace with your AI test generator command
+          # Example: node generateTests.js
+          node testGenerator.js  # Modify to point to the correct script
+
+      # Step 5: Commit and Push Test Cases
+      - name: Commit and Push Test Cases
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add tests/ 
+          git commit -m "Add AI-generated test cases"
+          git push
+        env:
+          # Provide a GitHub token to enable pushing changes back
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          API_KEY: ${{ secrets.API_KEY }}
+          API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
+
