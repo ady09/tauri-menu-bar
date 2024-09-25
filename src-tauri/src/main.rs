@@ -20,7 +20,7 @@
   
   #[tauri::command]
   fn create_secondary_window(app: AppHandle) {
-    WindowBuilder::new(&app, "secondary", WindowUrl::App("http://localhost:3000/secondary".into()))
+    WindowBuilder::new(&app, "secondary", WindowUrl::App("/secondary".into()))
       .title("Secondary Window")
       .build()
       .expect("Failed to create secondary window");
