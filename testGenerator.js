@@ -37,15 +37,16 @@ async function getPRDiff(prNumber) {
 async function generateTestCases(diff) {
   try {
     const response = await axios.post(GEMINI_API_URL, {
-      prompt: `Analyze the following code changes and generate test cases in natural language (English).
+      contents:[{parts:[{text:
+        `Analyze the following code changes and generate test cases in natural language (English).
       Ensure to cover normal cases and highlight edge cases:
       ${diff}
-      Return the test cases in a readable format. `,
+      Return the test cases in a readable format. `}]}],
       key: GEMINI_API_KEY,
     });
-    console.log(response.data)
+    console.log(response.candidates)
     
-    return response.data; 
+    return response.candidates; 
   } catch (error) {
     console.error(`Error generating test cases: ${GEMINI_API_URL}`, error.message);
     throw error;
