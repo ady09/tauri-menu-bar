@@ -2,13 +2,13 @@
   "name": "menu-bar-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "tauri": "tauri",
-    "type": "module",
     "test": "wdio run wdio.conf.js"
   },
   "dependencies": {
