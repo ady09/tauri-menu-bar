@@ -18,6 +18,8 @@
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
+    "@octokit/rest": "^21.0.2",
+    "axios": "^1.7.7",
     "selenium-webdriver": "^4.0.0-beta.4"
   },
   "devDependencies": {
