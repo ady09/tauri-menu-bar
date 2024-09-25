@@ -41,7 +41,7 @@ async function generateTestCases(diff) {
         `Analyze the following code changes and generate test cases in natural language (English).
       Ensure to cover normal cases and highlight edge cases:
       ${diff}
-      Return the test cases in a readable format corresponding to the relevant function name in the code.`}]}],
+      Return the test cases in a readable format. (Keep it short and please include the important cases ONLY ) `}]}],
     });
     console.log(response.data.candidates[0].content.parts[0].text)
     
