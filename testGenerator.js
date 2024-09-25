@@ -43,7 +43,7 @@ async function generateTestCases(diff) {
       ${diff}
       Return the test cases in a readable format.`}]}],
     });
-    console.log(JSON.stringify(response))
+    console.log(response)
     
     return response.candidates; 
   } catch (error) {
