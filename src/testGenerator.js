@@ -47,6 +47,7 @@ async function generateTestCases(diff) {
     
     return response.data; 
   } catch (error) {
+    console.log(GEMINI_API_URL);
     console.error('Error generating test cases:', error.message);
     throw error;
   }
