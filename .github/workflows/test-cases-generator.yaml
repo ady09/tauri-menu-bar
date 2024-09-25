@@ -40,7 +40,7 @@ jobs:
       #     git push
         env:
           # Provide a GitHub token to enable pushing changes back
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
           API_KEY: ${{ secrets.API_KEY }}
           API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
 

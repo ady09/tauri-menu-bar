@@ -36,16 +36,16 @@ async function getPRDiff(prNumber) {
 
 async function generateTestCases(diff) {
   try {
-    const response = await axios.post(GEMINI_API_URL, {
-      prompt: `Analyze the following code changes and generate test cases in natural language (English).
+    const response = await axios.post(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      contents:[{parts:[{text:
+        `Analyze the following code changes and generate test cases in natural language (English).
       Ensure to cover normal cases and highlight edge cases:
       ${diff}
-      Return the test cases in a readable format. `,
-      key: GEMINI_API_KEY,
+      Return the test cases in a readable format. (Keep it short and please include the important cases ONLY ) `}]}],
     });
-    console.log(response.data)
+    console.log(response.data.candidates[0].content.parts[0].text)
     
-    return response.data; 
+    return response.data.candidates[0].content.parts[0].text; 
   } catch (error) {
     console.error(`Error generating test cases: ${GEMINI_API_URL}`, error.message);
     throw error;
@@ -54,14 +54,25 @@ async function generateTestCases(diff) {
 
 async function postCommentToPR(prNumber, testCases) {
   try {
+
     const commentBody = `### AI-Generated Test Cases\n\n${testCases}`;
-    
-    await octokit.issues.createComment({
+
+    await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
       owner: REPO_OWNER,
       repo: REPO_NAME,
       issue_number: prNumber, 
       body: commentBody,
-    });
+      headers: {
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    })
+    
+    // await octokit.issues.createComment({
+    //   owner: REPO_OWNER,
+    //   repo: REPO_NAME,
+    //   issue_number: prNumber, 
+    //   body: commentBody,
+    // });
 
     console.log('Test cases added to PR as comment.');
   } catch (error) {
