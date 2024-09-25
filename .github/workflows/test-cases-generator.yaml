@@ -31,13 +31,13 @@ jobs:
           node testGenerator.js  # Modify to point to the correct script
 
       # Step 5: Commit and Push Test Cases
-      - name: Commit and Push Test Cases
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add tests/ 
-          git commit -m "Add AI-generated test cases"
-          git push
+      # - name: Commit and Push Test Cases
+      #   run: |
+      #     git config --global user.name 'github-actions[bot]'
+      #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      #     git add tests/ 
+      #     git commit -m "Add AI-generated test cases"
+      #     git push
         env:
           # Provide a GitHub token to enable pushing changes back
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
