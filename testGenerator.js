@@ -54,14 +54,25 @@ async function generateTestCases(diff) {
 
 async function postCommentToPR(prNumber, testCases) {
   try {
+
     const commentBody = `### AI-Generated Test Cases\n\n${testCases}`;
-    
-    await octokit.issues.createComment({
+
+    await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
       owner: REPO_OWNER,
       repo: REPO_NAME,
       issue_number: prNumber, 
       body: commentBody,
-    });
+      headers: {
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    })
+    
+    // await octokit.issues.createComment({
+    //   owner: REPO_OWNER,
+    //   repo: REPO_NAME,
+    //   issue_number: prNumber, 
+    //   body: commentBody,
+    // });
 
     console.log('Test cases added to PR as comment.');
   } catch (error) {
