@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Update to match your project requirements
+          node-version: '18'  # Update to match your project requirements
 
       # Step 3: Install Dependencies (use package manager based on your project)
       - name: Install Dependencies
