@@ -55,7 +55,7 @@ async function generateTestCases(diff) {
 async function postCommentToPR(prNumber, testCases) {
   try {
 
-    const commentBody = `### AI-Generated Test Cases\n\n${testCases}`;
+    const commentBody = `### AI-Generated Test Cases\n\n${JSON.stringify(testCases)}`;
 
     await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
       owner: REPO_OWNER,
