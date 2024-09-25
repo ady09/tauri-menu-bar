@@ -28,7 +28,7 @@ jobs:
         run: |
           # Replace with your AI test generator command
           # Example: node generateTests.js
-          node index.js  # Modify to point to the correct script
+          node testGenerator.js  # Modify to point to the correct script
 
       # Step 5: Commit and Push Test Cases
       - name: Commit and Push Test Cases
