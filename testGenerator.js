@@ -45,7 +45,7 @@ async function generateTestCases(diff) {
     });
     console.log(response.data.candidates[0].content.parts[0].text)
     
-    return response.data; 
+    return response.data.candidates[0].content.parts[0].text; 
   } catch (error) {
     console.error(`Error generating test cases: ${GEMINI_API_URL}`, error.message);
     throw error;
@@ -55,7 +55,7 @@ async function generateTestCases(diff) {
 async function postCommentToPR(prNumber, testCases) {
   try {
 
-    const commentBody = `### AI-Generated Test Cases\n\n${JSON.stringify(testCases)}`;
+    const commentBody = `### AI-Generated Test Cases\n\n${testCases}`;
 
     await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
       owner: REPO_OWNER,
